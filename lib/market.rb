@@ -26,16 +26,19 @@ class Market
     total = Hash.new
     @vendors.each do |vendor|
       vendor.inventory.each do |item|
-        total[item] = Hash.new(0)
+        total[item] = Hash.new
       end
     end
     total.each do |key, value|
-      total[key][:vendors] = vendors_that_sell(key)
-      total[key][:quantity] = vendors_that_sell(key).sum do |vender|
-        vendor.check_stock(key)
+      value[:vendors] = vendors_that_sell(key)
+      sum = 0
+      vendors_that_sell(key).each do |vender|
+        sum += vendor.check_stock(key)
       end
+      value[:quantity] = sum
 
     end
+
     total
   end
 
