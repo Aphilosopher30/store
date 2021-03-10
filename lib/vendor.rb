@@ -6,12 +6,22 @@ class Vendor
     @inventory = Hash.new(0)
   end
 
-  def check_stalk(item)
+  def check_stock(item)
     @inventory[item]
   end
 
-  def stalk(item, number)
+  def stock(item, number)
     @inventory[item] += number
   end
+
+  def potential_revenue
+    @inventory.sum do |item, quantity|
+      item.price * quantity
+    end
+  end
+
+  
+
+
 
 end
