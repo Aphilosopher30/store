@@ -3,6 +3,15 @@ class Vendor
 
   def initialize(name)
     @name = name
-    @inventory = {}
+    @inventory = Hash.new(0)
   end
+
+  def check_stalk(item)
+    @inventory[item]
+  end
+
+  def stalk(item, number)
+    @inventory[item] += number
+  end
+
 end
